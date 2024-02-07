@@ -3,6 +3,7 @@ import yfinance as yf
 import datetime
 from datetime import date, timedelta
 import plotly.graph_objects as go
+from autots import AutoTS
 
 #Preparing data from yahoo
 today = date.today()    
@@ -31,3 +32,11 @@ figure.show()
 #Correlation for "Close"
 correlation= data.corr()
 print(correlation["Close"].sort_values(ascending=False))
+
+# prediction
+model= AutoTS(forecast_length=30,frequency="infer",ensemble="simple")
+model.fit(data,date_col="Date",value_col="Close",id_col=None)
+
+predicted= model.predict()
+forcast=predicted.forecast
+print(forcast)
