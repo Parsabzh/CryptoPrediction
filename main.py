@@ -27,3 +27,7 @@ figure = go.Figure(data=[go.Candlestick(x=data["Date"],
 
 figure.update_layout(title="BTC-USD",xaxis_rangeslider_visible=False)
 figure.show()
+
+#Correlation for "Close"
+correlation= data.corr()
+print(correlation["Close"].sort_values(ascending=False))
